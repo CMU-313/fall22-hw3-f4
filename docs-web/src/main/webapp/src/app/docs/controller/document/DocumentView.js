@@ -23,10 +23,6 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
    */
   $scope.score = '';
   $scope.addScore = function () {
-    if ($scope.score < 0 || $scope.score > 5) {
-      return;
-    }
-
     Restangular.one('score').put({
       id: $stateParams.id,
       score: $scope.score
