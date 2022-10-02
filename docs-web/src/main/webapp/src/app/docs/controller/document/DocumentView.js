@@ -19,22 +19,21 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   });
 
   /**
-   * Add a comment.
+   * Add a score.
    */
-     $scope.comment = '';
-     $scope.addComment = function () {
-       if ($scope.comment.length === 0) {
-         return;
-       }
-   
-       Restangular.one('comment').put({
-         id: $stateParams.id,
-         content: $scope.comment
-       }).then(function (data) {
-         $scope.comment = '';
-         $scope.comments.push(data);
-       });
-     };
+  $scope.score = '';
+  $scope.addScore = function () {
+    if ($scope.score.length === 0) {
+      return;
+    }
+
+    Restangular.one('score').put({
+      id: $stateParams.id,
+      score: $scope.score
+    }).then(function (data) {
+      $scope.score = '';
+    });
+  };
 
   /**
    * Add a comment.
