@@ -19,10 +19,15 @@ import java.util.List;
 
 
 /**
- * Comment REST resource.
- * 
- * @author bgamard
- */
+     * Add a comment.
+     *
+     * @api {post} /score Add a score
+     * @apiName PostComment
+     * 
+     * @param documentId Document ID
+     * @param content Score string
+     * @return Response
+     */
 @Path("/score")
 public class ScoreResource  extends BaseResource {
     @POST 
