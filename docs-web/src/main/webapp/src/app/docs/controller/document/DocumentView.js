@@ -31,7 +31,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       id: $stateParams.id,
       score: $scope.score
     }).then(function (data) {
-      $scope.score = '';
+      $scope.score = data;
     });
   };
 
