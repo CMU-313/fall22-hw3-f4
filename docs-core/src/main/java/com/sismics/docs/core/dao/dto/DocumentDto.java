@@ -65,7 +65,12 @@ public class DocumentDto {
      * Rights.
      */
     private String rights;
-    
+
+    /**
+     * Score. -- testing
+     */
+    private String score;
+
     /**
      * Language.
      */
@@ -205,6 +210,14 @@ public class DocumentDto {
     }
 
     public void setRights(String rights) {
+        this.rights = rights;
+    }
+
+    public String getScore() {
+        return rights;
+    }
+
+    public void setScore(String rights) {
         this.rights = rights;
     }
 
