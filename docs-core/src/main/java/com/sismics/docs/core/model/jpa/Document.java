@@ -100,6 +100,12 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_RIGHTS_C", length = 100)
     private String rights;
+
+    /**
+     * Score -- testing
+     */
+    @Column(name = "DOC_SCORE_C", length = 100)
+    private String score;
     
     /**
      * Creation date.
@@ -230,6 +236,14 @@ public class Document implements Loggable {
 
     public void setRights(String rights) {
         this.rights = rights;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 
     public Date getCreateDate() {
