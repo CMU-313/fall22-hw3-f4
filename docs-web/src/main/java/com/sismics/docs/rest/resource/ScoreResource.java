@@ -54,13 +54,13 @@ public class ScoreResource extends BaseResource {
         }
 
         // Update the document score
-        // document.setScore(score);
+        document.setScore(scoreStr);
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("reviewer", principal.getName());
-                // .add("score", document.getScore());
+                .add("reviewer", principal.getName())
+                .add("score", document.getScore());
         return Response.ok().entity(response.build()).build();
     }
 }
