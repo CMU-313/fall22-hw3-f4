@@ -21,6 +21,24 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Add a comment.
    */
+     $scope.comment = '';
+     $scope.addComment = function () {
+       if ($scope.comment.length === 0) {
+         return;
+       }
+   
+       Restangular.one('comment').put({
+         id: $stateParams.id,
+         content: $scope.comment
+       }).then(function (data) {
+         $scope.comment = '';
+         $scope.comments.push(data);
+       });
+     };
+
+  /**
+   * Add a comment.
+   */
   $scope.comment = '';
   $scope.addComment = function () {
     if ($scope.comment.length === 0) {
