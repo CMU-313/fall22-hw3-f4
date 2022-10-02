@@ -69,7 +69,7 @@
 	</div>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <ul class="nav nav-tabs">
         <li ng-class="{ active: $state.current.name == 'document.view.content' }">
           <a href="#/document/view/{{ document.id }}/content">
@@ -94,7 +94,7 @@
       </ul>
       <div ui-view="tab"></div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div ng-show="document.route_step">
         <p class="page-header page-header-side">
           <span class="fas fa-random"></span>
@@ -132,6 +132,37 @@
       </div>
 
       <p class="page-header page-header-side">
+        <span class="fas fa-star"></span>
+        Score
+      </p>
+
+      <!-- connected to backend and middleware -->
+      <!-- <div class="score-display">  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
+      </div>   -->
+
+
+      <!-- dummy data -->
+      <div class="score-display">  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(4)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(4)"></i>  
+      </div>  
+
+      <form ng-submit="addScore()">
+        <div class="form-group">
+          <select class="form-control" ng-model="score">
+            <option value="">Add a rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </form>
+
+      <p class="page-header page-header-side">
         <span class="fas fa-comments"></span>
         {{ 'document.view.comments' | translate }}
       </p>
@@ -167,6 +198,7 @@
           <input type="text" class="form-control" id="commentInput" ng-model="comment" ng-attr-placeholder="{{ 'document.view.add_comment' | translate }}">
         </div>
       </form>
+      
     </div>
   </div>
 </div>
