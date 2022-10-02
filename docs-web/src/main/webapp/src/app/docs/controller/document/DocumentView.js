@@ -19,6 +19,19 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   });
 
   /**
+   * Add a score.
+   */
+  $scope.score = '';
+  $scope.addScore = function () {
+    Restangular.one('score').post({
+      id: $stateParams.id,
+      score: $scope.score
+    }).then(function (data) {
+      $scope.score = data;
+    });
+  };
+
+  /**
    * Add a comment.
    */
   $scope.comment = '';
@@ -53,7 +66,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
           $scope.comments.splice($scope.comments.indexOf(comment), 1);
         });
       }
-    });
+    }); 
   };
 
   /**
