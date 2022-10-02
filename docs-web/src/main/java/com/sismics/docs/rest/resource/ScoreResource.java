@@ -3,8 +3,10 @@ package com.sismics.docs.rest.resource;
 import com.sismics.docs.core.constant.PermType;
 import com.sismics.docs.core.dao.AclDao;
 import com.sismics.docs.core.dao.CommentDao;
+import com.sismics.docs.core.dao.DocumentDao;
 import com.sismics.docs.core.dao.dto.CommentDto;
 import com.sismics.docs.core.model.jpa.Comment;
+import com.sismics.docs.core.model.jpa.Document;
 import com.sismics.rest.exception.ForbiddenClientException;
 import com.sismics.rest.util.ValidationUtil;
 import com.sismics.util.ImageUtil;
@@ -29,8 +31,8 @@ import java.util.List;
      * @return Response
      */
 @Path("/score")
-public class ScoreResource  extends BaseResource {
-    @POST 
+public class ScoreResource extends BaseResource {
+    @PUT 
     public Response addScore(@FormParam("id") String documentId,
             @FormParam("score") String scoreStr) {
         if (!authenticate()) {
@@ -40,25 +42,25 @@ public class ScoreResource  extends BaseResource {
         // Validate input data
         ValidationUtil.validateRequired(documentId, "id");
         int score = ValidationUtil.validateInteger(scoreStr, "score");
-        if (score < 1 || score > 5) {
-            throw new Exception("A score should be in range from 1 to 5!");
-        }
+        // if (score < 1 || score > 5) {
+        //     // error message
+        // }
 
         // Get the document
         DocumentDao documentDao = new DocumentDao();
-        Document document = documentDao.getById(id);
+        Document document = documentDao.getById(documentId);
         if (document == null) {
             throw new NotFoundException();
         }
 
         // Update the document score
-        document.setScore(score);
+        // document.setScore(score);
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("reviewer", principal.getName())
-                .add("score", document.getScore());
+                .add("reviewer", principal.getName());
+                // .add("score", document.getScore());
         return Response.ok().entity(response.build()).build();
     }
 }

@@ -23,11 +23,11 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
    */
   $scope.score = '';
   $scope.addScore = function () {
-    Restangular.one('score').post({
+    Restangular.one('score').put({
       id: $stateParams.id,
       score: $scope.score
     }).then(function (data) {
-      $scope.score = data;
+      $scope.score = data.score;
     });
   };
 

@@ -137,17 +137,17 @@
       </p>
 
       <!-- connected to backend and middleware -->
-      <!-- <div class="score-display">  
+      <div class="score-display">  
         <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
         <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
-      </div>   -->
+      </div>  
 
 
       <!-- dummy data -->
-      <div class="score-display">  
+      <!-- <div class="score-display">  
         <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(4)"></i>       
         <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(4)"></i>  
-      </div>  
+      </div>   -->
 
       <form ng-submit="addScore()">
         <div class="form-group">
@@ -159,6 +159,7 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
+          <input type="submit">
         </div>
       </form>
 
