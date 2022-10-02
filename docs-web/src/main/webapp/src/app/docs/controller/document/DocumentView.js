@@ -21,13 +21,12 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Add a score.
    */
-  $scope.score = '';
   $scope.addScore = function () {
     Restangular.one('score').put({
       id: $stateParams.id,
       score: $scope.score
     }).then(function (data) {
-      $scope.score = data.score;
+      $scope.curscore = data.score;
     });
   };
 
