@@ -53,7 +53,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
           $scope.comments.splice($scope.comments.indexOf(comment), 1);
         });
       }
-    });
+    }); 
   };
 
   /**
