@@ -23,7 +23,7 @@ import java.util.List;
  * 
  * @author bgamard
  */
-@Path("/comment")
+@Path("/score")
 public class ScoreResource  extends BaseResource {
     @POST 
     public Response addScore(@FormParam("id") String documentId,
