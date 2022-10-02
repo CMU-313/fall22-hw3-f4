@@ -23,7 +23,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
    */
   $scope.score = '';
   $scope.addScore = function () {
-    if ($scope.score.length === 0) {
+    if ($scope.score < 0 || $scope.score > 5) {
       return;
     }
 
