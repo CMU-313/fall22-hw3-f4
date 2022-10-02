@@ -133,21 +133,25 @@
 
       <p class="page-header page-header-side">
         <span class="fas fa-star"></span>
-        Rating
+        Score
       </p>
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <div class="ratings">
-        <div ng-show="!ratings && !ratingsError" class="fa fa-star checked rating-star"></div>
-        <div ng-show="!ratings && !ratingsError" class="fa fa-star checked rating-star"></div>
-        <div ng-show="!ratings && !ratingsError" class="fa fa-star checked rating-star"></div>
-        <div ng-show="!ratings && !ratingsError" class="fa fa-star rating-star"></div>
-        <div ng-show="!ratings && !ratingsError" class="fa fa-star rating-star"></div>
-      </div>
+      <!-- connected to backend and middleware -->
+      <!-- <div class="score-display">  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
+      </div>   -->
 
-      <form ng-submit="addComment()">
+
+      <!-- dummy data -->
+      <div class="score-display">  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(4)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(4)"></i>  
+      </div>  
+
+      <form ng-submit="addScore()">
         <div class="form-group">
-          <select class="form-control" name="rating" id="rating">
+          <select class="form-control" ng-model="score">
             <option value="">Add a rating</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -157,7 +161,6 @@
           </select>
         </div>
       </form>
-
 
       <p class="page-header page-header-side">
         <span class="fas fa-comments"></span>

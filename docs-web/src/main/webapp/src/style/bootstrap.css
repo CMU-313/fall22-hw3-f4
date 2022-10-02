@@ -1,8 +1,9 @@
 /* added css */
-.ratings {
+.score-display {
   display: flex;
   width: 100%;
   gap: 10px;
+  margin-bottom: 20px;
 }
 .rating-star {
   height: 20px;
@@ -15,10 +16,8 @@
 .fa-star:before {
   font-size: 20px;
 }
-.checked {
-  border: none;
-  color: rgb(233, 175, 0);
-}
+
+
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
