@@ -19,6 +19,18 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   });
 
   /**
+   * Add a score.
+   */
+  $scope.addScore = function () {
+    Restangular.one('score').put({
+      id: $stateParams.id,
+      score: $scope.score
+    }).then(function (data) {
+      $scope.curscore = data.score;
+    });
+  };
+
+  /**
    * Add a comment.
    */
   $scope.comment = '';
@@ -53,7 +65,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
           $scope.comments.splice($scope.comments.indexOf(comment), 1);
         });
       }
-    });
+    }); 
   };
 
   /**
@@ -164,4 +176,35 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       }
     });
   };
+
+
+  /**
+   * Get number of grey stars
+   */
+   $scope.getGreyStars = function (num) {  
+    var numberOfStars = Math.round(num);  
+    var restStars = 5 - numberOfStars;  
+    if (restStars > 0) {  
+        var data = new Array(restStars);  
+        for (var i = 0; i < data.length; i++) {  
+            data[i] = i;  
+        }  
+        return data;  
+    }  
+  };
+
+  /**
+   * Get number of yellow stars
+   */
+  $scope.getYellowStars = function (num) {  
+    var numberOfStars = Math.round(num);  
+    if (numberOfStars > 5)  
+        numberOfStars = 5;  
+    var data = new Array(numberOfStars);  
+    for (var i = 0; i < data.length; i++) {  
+        data[i] = i;  
+    }  
+    return data;  
+  };  
+  
 });
