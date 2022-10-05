@@ -1,0 +1,8 @@
+User Testing Protocol:
+
+Single rating
+To test single rating, we will ask a user to pretend that they are a reviewer looking at the students' resume and think aloud as they perform the task. 
+
+We will ask the participant to perform these tasks:
+1. Look over the resume and add a rating.
+2. Change your rating to be one star lower.
