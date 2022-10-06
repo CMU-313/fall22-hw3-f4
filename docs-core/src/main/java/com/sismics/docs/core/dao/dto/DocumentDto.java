@@ -67,9 +67,24 @@ public class DocumentDto {
     private String rights;
 
     /**
-     * Score. -- testing
+     * skill score
      */
-    private String score;
+    private String skillScore;
+
+    /**
+     * experience score
+     */
+    private String experienceScore;
+
+    /**
+     * gpa score
+     */
+    private String gpa;
+
+    /**
+     * comment
+     */
+    private String comment;
 
     /**
      * Language.
@@ -213,12 +228,36 @@ public class DocumentDto {
         this.rights = rights;
     }
 
-    public String getScore() {
-        return rights;
+    public String getSkillScore() {
+        return skillScore;
     }
 
-    public void setScore(String rights) {
-        this.rights = rights;
+    public void setSkillScore(String score) {
+        this.skillScore = score;
+    }
+
+    public String getExperienceScore() {
+        return experienceScore;
+    }
+
+    public void setExperienceScore(String score) {
+        this.experienceScore = score;
+    }
+
+    public String getGPA() {
+        return gpa;
+    }
+
+    public void setGPA(String score) {
+        this.gpa = score;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Long getCreateTimestamp() {
