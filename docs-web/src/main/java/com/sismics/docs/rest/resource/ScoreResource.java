@@ -33,8 +33,8 @@ import java.util.List;
 @Path("/score")
 public class ScoreResource extends BaseResource {
     @PUT 
-    public Response addScore(@FormParam("id") String documentId,
-            @FormParam("score") String scoreStr) {
+    public Response addSkillScore(@FormParam("id") String documentId,
+            @FormParam("skillScore") String scoreStr) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
@@ -54,13 +54,77 @@ public class ScoreResource extends BaseResource {
         }
 
         // Update the document score
-        document.setScore(scoreStr);
+        document.setSkillScore(scoreStr);
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
                 .add("reviewer", principal.getName())
-                .add("score", document.getScore());
+                .add("score", document.getSkillScore());
+        return Response.ok().entity(response.build()).build();
+    }
+
+    @PUT 
+    public Response addExperienceScore(@FormParam("id") String documentId,
+            @FormParam("experienceScore") String scoreStr) {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        // Validate input data
+        ValidationUtil.validateRequired(documentId, "id");
+        int score = ValidationUtil.validateInteger(scoreStr, "score");
+        // if (score < 1 || score > 5) {
+        //     // error message
+        // }
+
+        // Get the document
+        DocumentDao documentDao = new DocumentDao();
+        Document document = documentDao.getById(documentId);
+        if (document == null) {
+            throw new NotFoundException();
+        }
+
+        // Update the document score
+        document.setExperienceScore(scoreStr);
+        documentDao.update(document, principal.getId());
+        
+        // Returns ok
+        JsonObjectBuilder response = Json.createObjectBuilder()
+                .add("reviewer", principal.getName())
+                .add("score", document.getExperienceScore());
+        return Response.ok().entity(response.build()).build();
+    }
+
+    @PUT 
+    public Response addAcademicScore(@FormParam("id") String documentId,
+            @FormParam("academicScore") String scoreStr) {
+        if (!authenticate()) {
+            throw new ForbiddenClientException();
+        }
+        
+        // Validate input data
+        ValidationUtil.validateRequired(documentId, "id");
+        int score = ValidationUtil.validateInteger(scoreStr, "score");
+        // if (score < 1 || score > 5) {
+        //     // error message
+        // }
+
+        // Get the document
+        DocumentDao documentDao = new DocumentDao();
+        Document document = documentDao.getById(documentId);
+        if (document == null) {
+            throw new NotFoundException();
+        }
+
+        // Update the document score
+        document.setAcademicScore(scoreStr);
+        documentDao.update(document, principal.getId());
+        
+        // Returns ok
+        JsonObjectBuilder response = Json.createObjectBuilder()
+                .add("reviewer", principal.getName())
+                .add("score", document.getAcademicScore());
         return Response.ok().entity(response.build()).build();
     }
 }
