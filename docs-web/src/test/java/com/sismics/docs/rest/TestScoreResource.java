@@ -65,8 +65,23 @@ public class TestScoreResource extends BaseJerseyTest {
         String skillScoreVal = json.getString("score");
         Assert.assertEquals("3", skillScoreVal);
         
-        String reviewerVal = json.getString("reviewer");
-        Assert.assertEquals("testUser", reviewerVal);
+        String skillReviewerVal = json.getString("reviewer");
+        Assert.assertEquals("testUser", skillReviewerVal);
+
+        // Put an experience score to a document
+        json = target().path("/experienceScore").request()
+        .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+        .put(Entity.form(new Form()
+                .param("id", docId)
+                .param("experienceScore", "2")
+            ), JsonObject.class);
+        
+        // Test the experience score response values
+        String experienceScoreVal = json.getString("score");
+        Assert.assertEquals("3", experienceScoreVal);
+        
+        String experienceReviewerVal = json.getString("reviewer");
+        Assert.assertEquals("testUser", experienceReviewerVal);
 
         // get the list of documents 
         json = target().path("/document/" + docId)
