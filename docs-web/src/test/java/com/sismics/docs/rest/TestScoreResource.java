@@ -53,17 +53,19 @@ public class TestScoreResource extends BaseJerseyTest {
                     ), JsonObject.class);
         String docId = json.getString("id");
         
-        // Put a score to a document
+        // Skill score tests //
+
+        // Put a skill score to a document
         json = target().path("/score").request()
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
-                .param("score", "5")
+                .param("skillScore", "3")
             ), JsonObject.class);
         
         // Test the response values
-        String scoreVal = json.getString("score");
-        Assert.assertEquals("5", scoreVal);
+        String skillScoreVal = json.getString("score");
+        Assert.assertEquals("3", skillScoreVal);
         
         String reviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", reviewerVal);
@@ -75,7 +77,7 @@ public class TestScoreResource extends BaseJerseyTest {
                 .get(JsonObject.class);
         
         // Test the stored score 
-        String storedScore = json.getString("score");
-        Assert.assertEquals("5", storedScore);
+        String storedSkillScore = json.getString("skillScoreVal");
+        Assert.assertEquals("3", storedSkillScore);
     }
 }
