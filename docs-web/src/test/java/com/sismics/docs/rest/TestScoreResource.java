@@ -7,6 +7,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.sismics.util.filter.TokenBasedSecurityFilter;
@@ -16,26 +17,28 @@ public class TestScoreResource extends BaseJerseyTest {
      * Test the score resource.
      * 
      * @throws Exception e
-     */
-    @Test
-    public void testScoreResource() throws Exception {
+    */
+
+    private String TEST_USER_TOKEN, DOC_ID;
+    
+    @Before 
+    public void init() {
         // Login doc
         clientUtil.createUser("testUser");
-        String testUserToken = clientUtil.login("testUser");
-        
+        TEST_USER_TOKEN = clientUtil.login("testUser");
+
         // Create a tag
         JsonObject json = target().path("/tag").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
                 .put(Entity.form(new Form()
                         .param("name", "SuperTag")
                         .param("color", "#ffff00")), JsonObject.class);
         String tagId = json.getString("id");
-        Assert.assertNotNull(tagId);
 
         // Create a document with document1
         long createDate = new Date().getTime();
         json = target().path("/document").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
                 .put(Entity.form(new Form()
                         .param("title", "My super title document 1")
                         .param("description", "My super description for document 1")
@@ -51,16 +54,18 @@ public class TestScoreResource extends BaseJerseyTest {
                         .param("language", "eng")
                         .param("create_date", Long.toString(createDate))
                     ), JsonObject.class);
-        String docId = json.getString("id");
-        Assert.assertNotNull(docId);
+        DOC_ID = json.getString("id");
+    }
 
+    @Test
+    public void testScoreResourceReponse() throws Exception {
         // Put a score to a document
-        json = target().path("/score").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
-                .put(Entity.form(new Form()
-                        .param("id", docId)
-                        .param("score", "5")
-                    ), JsonObject.class);
+        JsonObject json = target().path("/score").request()
+        .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
+        .put(Entity.form(new Form()
+                .param("id", DOC_ID)
+                .param("score", "5")
+            ), JsonObject.class);
         
         String scoreVal = json.getString("score");
         Assert.assertEquals("5", scoreVal);
