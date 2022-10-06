@@ -2,12 +2,12 @@ package com.sismics.docs.rest;
 
 import java.util.Date;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.sismics.util.filter.TokenBasedSecurityFilter;
@@ -18,18 +18,15 @@ public class TestScoreResource extends BaseJerseyTest {
      * 
      * @throws Exception e
     */
-
-    private String TEST_USER_TOKEN, DOC_ID;
-    
-    @Before 
-    public void init() {
+    @Test
+    public void testScoreResourceReponse() throws Exception {
         // Login doc
         clientUtil.createUser("testUser");
-        TEST_USER_TOKEN = clientUtil.login("testUser");
+        String testUserToken = clientUtil.login("testUser");
 
         // Create a tag
         JsonObject json = target().path("/tag").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .put(Entity.form(new Form()
                         .param("name", "SuperTag")
                         .param("color", "#ffff00")), JsonObject.class);
@@ -38,7 +35,7 @@ public class TestScoreResource extends BaseJerseyTest {
         // Create a document with document1
         long createDate = new Date().getTime();
         json = target().path("/document").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .put(Entity.form(new Form()
                         .param("title", "My super title document 1")
                         .param("description", "My super description for document 1")
@@ -54,16 +51,13 @@ public class TestScoreResource extends BaseJerseyTest {
                         .param("language", "eng")
                         .param("create_date", Long.toString(createDate))
                     ), JsonObject.class);
-        DOC_ID = json.getString("id");
-    }
-
-    @Test
-    public void testScoreResourceReponse() throws Exception {
+        String docId = json.getString("id");
+        
         // Put a score to a document
-        JsonObject json = target().path("/score").request()
-        .cookie(TokenBasedSecurityFilter.COOKIE_NAME, TEST_USER_TOKEN)
+        json = target().path("/score").request()
+        .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
-                .param("id", DOC_ID)
+                .param("id", docId)
                 .param("score", "5")
             ), JsonObject.class);
         
@@ -71,6 +65,6 @@ public class TestScoreResource extends BaseJerseyTest {
         Assert.assertEquals("5", scoreVal);
         
         String reviewerVal = json.getString("reviewer");
-        Assert.assertEquals("testUser", reviewerVal); 
+        Assert.assertEquals("testUser", reviewerVal);
     }
 }
