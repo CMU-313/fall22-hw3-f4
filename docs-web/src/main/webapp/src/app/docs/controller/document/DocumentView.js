@@ -26,7 +26,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       id: $stateParams.id,
       score: $scope.skillScore
     }).then(function (data) {
-      $scope.curscore = data.score;
+      $scope.curscore = data.skillScore;
     });
   };
 
@@ -38,7 +38,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       id: $stateParams.id,
       score: $scope.experienceScore
     }).then(function (data) {
-      $scope.curscore = data.score;
+      $scope.curscore = data.experienceScore;
     });
   };
 
@@ -50,7 +50,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       id: $stateParams.id,
       score: $scope.acamedicScore
     }).then(function (data) {
-      $scope.curscore = data.score;
+      $scope.curscore = data.academicScore;
     });
   };
 
