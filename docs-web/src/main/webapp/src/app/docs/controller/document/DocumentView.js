@@ -21,7 +21,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Add a skill score.
    */
-  $scope.addScore = function () {
+  $scope.addSkillScore = function () {
     Restangular.one('skillScore').put({
       id: $stateParams.id,
       score: $scope.score
@@ -33,7 +33,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Add a experience score.
    */
-   $scope.addScore = function () {
+   $scope.addExperienceScore = function () {
     Restangular.one('experienceScore').put({
       id: $stateParams.id,
       score: $scope.score
@@ -45,7 +45,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Add an academic score.
    */
-   $scope.addScore = function () {
+   $scope.addAcademicScore = function () {
     Restangular.one('acamedicScore').put({
       id: $stateParams.id,
       score: $scope.score
