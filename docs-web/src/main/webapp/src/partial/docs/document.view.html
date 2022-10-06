@@ -170,16 +170,9 @@
         </div>
       </form>
 
-      <form ng-submit="addAcademicScore()">
+      <form ng-submit="addGPAScore()">
         <div class="form-group">
-          <select class="form-control" ng-model="academicScore">
-            <option value="">Academic score</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder="Add GPA">
           <input class="btn btn-sm" type="submit">
         </div>
       </form>
