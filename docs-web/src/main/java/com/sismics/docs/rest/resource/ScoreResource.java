@@ -23,7 +23,7 @@ import java.util.List;
 /**
      * Add a comment.
      *
-     * @api {post} /score Add a score
+     * @api {put} /score Add a score
      * @apiName PostComment
      * 
      * @param documentId Document ID
@@ -33,18 +33,17 @@ import java.util.List;
 @Path("/score")
 public class ScoreResource extends BaseResource {
     @PUT 
+    @Path("/skillScore")
     public Response addSkillScore(@FormParam("id") String documentId,
             @FormParam("skillScore") String scoreStr) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
+        System.out.println("skill score: " + scoreStr);
         
         // Validate input data
         ValidationUtil.validateRequired(documentId, "id");
-        int score = ValidationUtil.validateInteger(scoreStr, "score");
-        // if (score < 1 || score > 5) {
-        //     // error message
-        // }
+        int score = ValidationUtil.validateInteger(scoreStr, "skillScore");
 
         // Get the document
         DocumentDao documentDao = new DocumentDao();
@@ -64,19 +63,18 @@ public class ScoreResource extends BaseResource {
         return Response.ok().entity(response.build()).build();
     }
 
+    
     @PUT 
+    @Path("/experienceScore")
     public Response addExperienceScore(@FormParam("id") String documentId,
             @FormParam("experienceScore") String scoreStr) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
-        
+        System.out.println("experience score: " + scoreStr);
         // Validate input data
         ValidationUtil.validateRequired(documentId, "id");
         int score = ValidationUtil.validateInteger(scoreStr, "score");
-        // if (score < 1 || score > 5) {
-        //     // error message
-        // }
 
         // Get the document
         DocumentDao documentDao = new DocumentDao();
@@ -96,20 +94,17 @@ public class ScoreResource extends BaseResource {
         return Response.ok().entity(response.build()).build();
     }
 
+    
     @PUT 
-    public Response addAcademicScore(@FormParam("id") String documentId,
-            @FormParam("academicScore") String scoreStr) {
+    @Path("/GPAScore")
+    public Response addGPAScore(@FormParam("id") String documentId,
+            @FormParam("GPAScore") String scoreStr) {
         if (!authenticate()) {
             throw new ForbiddenClientException();
         }
-        
+        System.out.println("GPA score: " + scoreStr);
         // Validate input data
         ValidationUtil.validateRequired(documentId, "id");
-        int score = ValidationUtil.validateInteger(scoreStr, "score");
-        // if (score < 1 || score > 5) {
-        //     // error message
-        // }
-
         // Get the document
         DocumentDao documentDao = new DocumentDao();
         Document document = documentDao.getById(documentId);
@@ -118,13 +113,13 @@ public class ScoreResource extends BaseResource {
         }
 
         // Update the document score
-        document.setAcademicScore(scoreStr);
+        document.setGPA(scoreStr);
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
                 .add("reviewer", principal.getName())
-                .add("score", document.getAcademicScore());
+                .add("score", document.getGPA());
         return Response.ok().entity(response.build()).build();
     }
 }
