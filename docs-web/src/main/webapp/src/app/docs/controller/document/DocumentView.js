@@ -53,7 +53,6 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
         GPAScore: $scope.GPAScore
       }).then(function (data) {
         $scope.curscore = data.GPAScore;
-        $scope.GPAScore = data.GPAScore;
       });
     } else {
       alert("Invalid Score! Score must be a numeric value between 0 and 4.")
