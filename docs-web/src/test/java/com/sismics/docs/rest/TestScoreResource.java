@@ -78,7 +78,7 @@ public class TestScoreResource extends BaseJerseyTest {
         
         // Test the experience score response values
         String experienceScoreVal = json.getString("score");
-        Assert.assertEquals("3", experienceScoreVal);
+        Assert.assertEquals("2", experienceScoreVal);
         
         String experienceReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", experienceReviewerVal);
@@ -104,8 +104,14 @@ public class TestScoreResource extends BaseJerseyTest {
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .get(JsonObject.class);
         
-        // Test the stored score 
-        String storedSkillScore = json.getString("skillScoreVal");
+        // Test the stored scores for skill, experience, and gpa
+        String storedSkillScore = json.getString("skillScore");
         Assert.assertEquals("3", storedSkillScore);
+
+        String storedExperienceScore = json.getString("experienceScore");
+        Assert.assertEquals("2", storedExperienceScore);
+
+        String storedGPA = json.getString("GPA");
+        Assert.assertEquals("1.4", storedGPA);
     }
 }
