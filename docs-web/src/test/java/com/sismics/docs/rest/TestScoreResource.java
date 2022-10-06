@@ -83,6 +83,21 @@ public class TestScoreResource extends BaseJerseyTest {
         String experienceReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", experienceReviewerVal);
 
+        // Put gpa to a document
+        json = target().path("/GPA").request()
+        .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+        .put(Entity.form(new Form()
+                .param("id", docId)
+                .param("GPA", "1.4")
+            ), JsonObject.class);
+        
+        // Test the experience score response values
+        String GPAVal = json.getString("GPA");
+        Assert.assertEquals("1.4", GPAVal);
+        
+        String GPAReviewerVal = json.getString("reviewer");
+        Assert.assertEquals("testUser", GPAReviewerVal);
+
         // get the list of documents 
         json = target().path("/document/" + docId)
                 .request()
