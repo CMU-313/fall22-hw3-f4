@@ -70,7 +70,6 @@ public class TestScoreResource extends BaseJerseyTest {
 
         // get the list of documents 
         json = target().path("/document/" + docId)
-                // .queryParam("id", docId)
                 .request()
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .get(JsonObject.class);
