@@ -66,8 +66,6 @@ public class TestScoreResource extends BaseJerseyTest {
         Assert.assertEquals("5", scoreVal);
         
         String reviewerVal = json.getString("reviewer");
-        Assert.assertEquals("testUser", reviewerVal);
-
-        
+        Assert.assertEquals("testUser", reviewerVal); 
     }
 }
