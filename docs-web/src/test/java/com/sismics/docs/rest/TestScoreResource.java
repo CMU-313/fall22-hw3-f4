@@ -53,17 +53,15 @@ public class TestScoreResource extends BaseJerseyTest {
                     ), JsonObject.class);
         String docId = json.getString("id");
         
-        // Skill score tests //
-
         // Put a skill score to a document
-        json = target().path("/score").request()
+        json = target().path("/skillScore").request()
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
                 .param("skillScore", "3")
             ), JsonObject.class);
         
-        // Test the response values
+        // Test the skill score response values
         String skillScoreVal = json.getString("score");
         Assert.assertEquals("3", skillScoreVal);
         
