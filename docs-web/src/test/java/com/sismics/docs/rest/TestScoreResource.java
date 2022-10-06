@@ -20,12 +20,12 @@ public class TestScoreResource extends BaseJerseyTest {
     @Test
     public void testScoreResource() throws Exception {
         // Login doc
-        clientUtil.createUser("doc");
-        String docToken = clientUtil.login("doc");
+        clientUtil.createUser("testUser");
+        String testUserToken = clientUtil.login("testUser");
         
         // Create a tag
         JsonObject json = target().path("/tag").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, docToken)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .put(Entity.form(new Form()
                         .param("name", "SuperTag")
                         .param("color", "#ffff00")), JsonObject.class);
@@ -35,7 +35,7 @@ public class TestScoreResource extends BaseJerseyTest {
         // Create a document with document1
         long createDate = new Date().getTime();
         json = target().path("/document").request()
-                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, docToken)
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
                 .put(Entity.form(new Form()
                         .param("title", "My super title document 1")
                         .param("description", "My super description for document 1")
@@ -53,6 +53,21 @@ public class TestScoreResource extends BaseJerseyTest {
                     ), JsonObject.class);
         String docId = json.getString("id");
         Assert.assertNotNull(docId);
+
+        // Put a score to a document
+        json = target().path("/score").request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+                .put(Entity.form(new Form()
+                        .param("id", docId)
+                        .param("score", "5")
+                    ), JsonObject.class);
+        
+        String scoreVal = json.getString("score");
+        Assert.assertEquals("5", scoreVal);
+        
+        String reviewerVal = json.getString("reviewer");
+        Assert.assertEquals("testUser", reviewerVal);
+
         
     }
 }
