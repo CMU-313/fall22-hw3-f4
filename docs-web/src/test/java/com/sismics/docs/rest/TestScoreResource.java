@@ -61,10 +61,22 @@ public class TestScoreResource extends BaseJerseyTest {
                 .param("score", "5")
             ), JsonObject.class);
         
+        // Test the response values
         String scoreVal = json.getString("score");
         Assert.assertEquals("5", scoreVal);
         
         String reviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", reviewerVal);
+
+        // get the list of documents 
+        json = target().path("/document/" + docId)
+                // .queryParam("id", docId)
+                .request()
+                .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
+                .get(JsonObject.class);
+        
+        // Test the stored score 
+        String storedScore = json.getString("score");
+        Assert.assertEquals("5", storedScore);
     }
 }
