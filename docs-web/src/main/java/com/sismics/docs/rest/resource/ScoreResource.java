@@ -42,9 +42,6 @@ public class ScoreResource extends BaseResource {
         // Validate input data
         ValidationUtil.validateRequired(documentId, "id");
         int score = ValidationUtil.validateInteger(scoreStr, "score");
-        // if (score < 1 || score > 5) {
-        //     // error message
-        // }
 
         // Get the document
         DocumentDao documentDao = new DocumentDao();
