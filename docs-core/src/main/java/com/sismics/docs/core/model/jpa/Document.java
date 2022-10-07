@@ -102,11 +102,29 @@ public class Document implements Loggable {
     private String rights;
 
     /**
-     * Score -- testing
+     * Skill Score
      */
-    @Column(name = "DOC_SCORE_C", length = 100)
-    private String score;
+    @Column(name = "DOC_SKILL_SCORE_C", length = 100)
+    private String skillScore;
+
+    /**
+     * Experience Score
+     */
+    @Column(name = "DOC_EXP_SCORE_C", length = 100)
+    private String experienceScore;
     
+    /**
+     * GPA
+     */
+    @Column(name = "DOC_GPA_C", length = 100)
+    private String gpa;
+
+    /**
+     * Comment
+     */
+    @Column(name = "DOC_COMMENT_C", length = 100)
+    private String comment;
+
     /**
      * Creation date.
      */
@@ -238,12 +256,40 @@ public class Document implements Loggable {
         this.rights = rights;
     }
 
-    public String getScore() {
-        return score;
+    public String getSkillScore() {
+        return skillScore;
     }
 
-    public void setScore(String score) {
-        this.score = score;
+    public void setSkillScore(String score) {
+        this.skillScore = score;
+    }
+
+    public String getExperienceScore() {
+        return experienceScore;
+    }
+
+    public void setExperienceScore(String score) {
+        this.experienceScore = score;
+    }
+
+    public String getGPA() {
+        return gpa;
+    }
+
+    public void setGPA(String score) {
+        this.gpa = score;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Double averageScore() {
+        return Double.parseDouble(experienceScore) + Double.parseDouble(skillScore) + Double.parseDouble(gpa) * 5/4;
     }
 
     public Date getCreateDate() {

@@ -19,15 +19,54 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   });
 
   /**
-   * Add a score.
+   * Add a skill score.
    */
-  $scope.addScore = function () {
-    Restangular.one('score').put({
-      id: $stateParams.id,
-      score: $scope.score
-    }).then(function (data) {
-      $scope.curscore = data.score;
-    });
+  $scope.addSkillScore = function () {
+    var score = parseInt($scope.skillScore);
+    if (score >= 1 && score <= 5) {
+      Restangular.one('score/skillScore').put({
+        id: $stateParams.id,
+        skillScore: $scope.skillScore
+      }).then(function (data) {
+        $scope.curscore = data.score;
+      });
+    } else {
+      alert("Invalid Score! Score must be a numeric value between 1 and 5.")
+    }
+  };
+
+  /**
+   * Add a experience score.
+   */
+   $scope.addExperienceScore = function () {
+    var score = parseInt($scope.experienceScore);
+    if (score >= 1 && score <= 5) {
+      Restangular.one('score/experienceScore').put({
+        id: $stateParams.id,
+        experienceScore: $scope.experienceScore
+      }).then(function (data) {
+        $scope.curscore = data.score;
+      });
+    } else {
+      alert("Invalid Score! Score must be a numeric value between 1 and 5.")
+    }
+  };
+
+  /**
+   * Add an academic score.
+   */
+   $scope.addGPAScore = function () {
+    var score = parseFloat($scope.GPAScore);
+    if (score >= 0 && score <= 4) {
+      Restangular.one('score/GPAScore').put({
+        id: $stateParams.id,
+        GPAScore: $scope.GPAScore
+      }).then(function (data) {
+        $scope.curscore = data.score;
+      });
+    } else {
+      alert("Invalid Score! Score must be a numeric value between 0 and 4.")
+    }
   };
 
   /**
