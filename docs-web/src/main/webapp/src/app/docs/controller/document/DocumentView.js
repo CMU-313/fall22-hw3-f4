@@ -28,7 +28,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
         id: $stateParams.id,
         skillScore: $scope.skillScore
       }).then(function (data) {
-        $scope.curscore = data.skillScore;
+        $scope.curscore = data.score;
       });
     } else {
       alert("Invalid Score! Score must be a numeric value between 1 and 5.")
@@ -45,7 +45,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
         id: $stateParams.id,
         experienceScore: $scope.experienceScore
       }).then(function (data) {
-        $scope.curscore = data.experienceScore;
+        $scope.curscore = data.score;
       });
     } else {
       alert("Invalid Score! Score must be a numeric value between 1 and 5.")
@@ -62,7 +62,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
         id: $stateParams.id,
         GPAScore: $scope.GPAScore
       }).then(function (data) {
-        $scope.curscore = data.GPAScore;
+        $scope.curscore = data.score;
       });
     } else {
       alert("Invalid Score! Score must be a numeric value between 0 and 4.")
