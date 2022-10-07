@@ -32,6 +32,10 @@ import java.util.List;
      */
 @Path("/score")
 public class ScoreResource extends BaseResource {
+    private float calculateAvgScore(int score1, int score2, float score3) {
+        return (score1 + score2 + score3) / 3;
+    }
+
     @PUT 
     @Path("/skillScore")
     public Response addSkillScore(@FormParam("id") String documentId,
@@ -52,14 +56,26 @@ public class ScoreResource extends BaseResource {
             throw new NotFoundException();
         }
 
-        // Update the document score
+        // Update the document skill score
         document.setSkillScore(scoreStr);
-        documentDao.update(document, principal.getId());
         
+        // Calculate for avg score, if any score is not null, set it to 0
+        if (document.getExperienceScore() == null) {
+            document.setExperienceScore("0");
+        }
+        if (document.getGPAScore() == null) {
+            document.setGPAScore("0");
+        }
+        int experienceScore = document.getExperienceScore();
+        float GPAScore = document.getGPAScore();
+
+        float curScore = calculateAvgScore(score, experienceScore, GPAScore);
+
+        documentDao.update(document, principal.getId());
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("reviewer", principal.getName())
-                .add("score", document.getSkillScore());
+                .add("reviewer", principal.getName());
+                .add("score", curScore);
         return Response.ok().entity(response.build()).build();
     }
 
@@ -83,14 +99,27 @@ public class ScoreResource extends BaseResource {
             throw new NotFoundException();
         }
 
-        // Update the document score
+        // Update the document experience score
         document.setExperienceScore(scoreStr);
+
+        // Calculate for avg score, if any score is not null, set it to 0
+        if (document.getSkillScore() == null) {
+            document.setSkillScore("0");
+        }
+        if (document.getGPAScore() == null) {
+            document.setGPAScore("0");
+        }
+        int skillScore = document.getSkillScore();
+        float GPAScore = document.getGPAScore();
+
+        float curScore = calculateAvgScore(score, skillScore, GPAScore);
+
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
                 .add("reviewer", principal.getName())
-                .add("score", document.getExperienceScore());
+                .add("score", curScore);
         return Response.ok().entity(response.build()).build();
     }
 
@@ -111,15 +140,29 @@ public class ScoreResource extends BaseResource {
         if (document == null) {
             throw new NotFoundException();
         }
+        float score = Float.parseFloat(scoreStr);
 
-        // Update the document score
+        // Update the document GPA score
         document.setGPA(scoreStr);
+
+        // Calculate for avg score, if any score is not null, set it to 0
+        if (document.getExperienceScore() == null) {
+            document.setExperienceScore("0");
+        }
+        if (document.getSkillScore() == null) {
+            document.setSkillScore("0");
+        }
+        int experienceScore = document.getExperienceScore();
+        int skillScore = document.getGPAScore();
+
+        float curScore = calculateAvgScore(skillScore, experienceScore, score);
+
         documentDao.update(document, principal.getId());
         
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
                 .add("reviewer", principal.getName())
-                .add("score", document.getGPA());
+                .add("score", curScore);
         return Response.ok().entity(response.build()).build();
     }
 }
