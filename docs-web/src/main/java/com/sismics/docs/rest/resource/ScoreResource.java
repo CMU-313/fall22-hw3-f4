@@ -63,18 +63,18 @@ public class ScoreResource extends BaseResource {
         if (document.getExperienceScore() == null) {
             document.setExperienceScore("0");
         }
-        if (document.getGPAScore() == null) {
-            document.setGPAScore("0");
+        if (document.getGPA() == null) {
+            document.setGPA("0");
         }
-        int experienceScore = document.getExperienceScore();
-        float GPAScore = document.getGPAScore();
+        int experienceScore = Integer.parseInt(document.getExperienceScore());
+        float GPAScore = Float.parseFloat(document.getGPA());
 
         float curScore = calculateAvgScore(score, experienceScore, GPAScore);
 
         documentDao.update(document, principal.getId());
         // Returns ok
         JsonObjectBuilder response = Json.createObjectBuilder()
-                .add("reviewer", principal.getName());
+                .add("reviewer", principal.getName())
                 .add("score", curScore);
         return Response.ok().entity(response.build()).build();
     }
@@ -106,11 +106,11 @@ public class ScoreResource extends BaseResource {
         if (document.getSkillScore() == null) {
             document.setSkillScore("0");
         }
-        if (document.getGPAScore() == null) {
-            document.setGPAScore("0");
+        if (document.getGPA() == null) {
+            document.setGPA("0");
         }
-        int skillScore = document.getSkillScore();
-        float GPAScore = document.getGPAScore();
+        int skillScore = Integer.parseInt(document.getSkillScore());
+        float GPAScore = Float.parseFloat(document.getGPA());
 
         float curScore = calculateAvgScore(score, skillScore, GPAScore);
 
@@ -152,8 +152,8 @@ public class ScoreResource extends BaseResource {
         if (document.getSkillScore() == null) {
             document.setSkillScore("0");
         }
-        int experienceScore = document.getExperienceScore();
-        int skillScore = document.getGPAScore();
+        int experienceScore = Integer.parseInt(document.getExperienceScore());
+        int skillScore = Integer.parseInt(document.getSkillScore());
 
         float curScore = calculateAvgScore(skillScore, experienceScore, score);
 
