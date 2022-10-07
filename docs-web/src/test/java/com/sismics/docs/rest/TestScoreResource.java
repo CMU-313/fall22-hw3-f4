@@ -62,8 +62,8 @@ public class TestScoreResource extends BaseJerseyTest {
             ), JsonObject.class);
         
         // Test the skill score response values
-        String skillScoreVal = json.getString("score");
-        Assert.assertEquals("3", skillScoreVal);
+        String avgSkill = json.getString("score");
+        Assert.assertEquals("1.0", avgSkill);
         
         String skillReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", skillReviewerVal);
@@ -77,8 +77,8 @@ public class TestScoreResource extends BaseJerseyTest {
             ), JsonObject.class);
         
         // Test the experience score response values
-        String experienceScoreVal = json.getString("score");
-        Assert.assertEquals("2.5", experienceScoreVal);
+        String avgExperience = json.getString("score");
+        Assert.assertEquals("1.6666666", avgExperience);
         
         String experienceReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", experienceReviewerVal);
@@ -88,12 +88,12 @@ public class TestScoreResource extends BaseJerseyTest {
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
-                .param("GPA", "1.5")
+                .param("GPAScore", "1.5")
             ), JsonObject.class);
         
-        // Test the experience score response values
-        String GPAVal = json.getString("GPA");
-        Assert.assertEquals("5", GPAVal);
+        // Test the gpa response values
+        String avgGPA = json.getString("score");
+        Assert.assertEquals("2.1666667", avgGPA);
         
         String GPAReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", GPAReviewerVal);
@@ -111,7 +111,7 @@ public class TestScoreResource extends BaseJerseyTest {
         String storedExperienceScore = json.getString("experienceScore");
         Assert.assertEquals("2", storedExperienceScore);
 
-        String storedGPA = json.getString("GPA");
+        String storedGPA = json.getString("GPAScore");
         Assert.assertEquals("1.5", storedGPA);
     }
 }
