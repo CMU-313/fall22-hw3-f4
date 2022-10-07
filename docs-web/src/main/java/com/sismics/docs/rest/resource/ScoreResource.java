@@ -33,7 +33,11 @@ import java.util.List;
 @Path("/score")
 public class ScoreResource extends BaseResource {
     private float calculateAvgScore(int score1, int score2, float score3) {
-        return (score1 + score2 + score3) / 3;
+        int numScores = 3;
+        if (score1 == 0) { numScores--; }
+        if (score2 == 0) { numScores--; }
+        if (score3 == 0) { numScores--; }
+        return (score1 + score2 + score3) / numScores;
     }
 
     @PUT 

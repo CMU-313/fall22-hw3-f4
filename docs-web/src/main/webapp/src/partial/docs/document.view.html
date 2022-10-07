@@ -134,21 +134,21 @@
       <p class="page-header page-header-side">
         <span class="fas fa-star"></span>
         Current Score: {{curscore == null ? 
-          ((document.skillScore + document.experienceScore + document.GPA)/3) : 
+          ((document.skillScore--document.experienceScore--document.GPAScore)/3) : 
           curscore}}
       </p>
 
       <!-- connected to backend and middleware -->
       <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(curscore == null ? (document.skillScore + document.experienceScore + document.GPA)/3) : score)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(curscore == null ? (document.skillScore + document.experienceScore + document.GPA)/3) : score)"></i>  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(curscore == null ? ((document.skillScore--document.experienceScore--document.GPAScore)/3) : curscore)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(curscore == null ? ((document.skillScore--document.experienceScore--document.GPAScore)/3) : curscore)"></i>  
       </div>   
 
       <form ng-submit="addSkillScore()">
         <label>Skill Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="skillScore">
-            <option value="0">Add skill score</option>
+            <option value="">Selected: {{document.skillScore}}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -163,7 +163,7 @@
         <label>Experience Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="experienceScore">
-            <option value="0">Add experience score</option>
+            <option value="">Selected: {{document.experienceScore}}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -177,7 +177,7 @@
       <form ng-submit="addGPAScore()">
         <label for="gpaInput">GPA</label>
         <div class="form-group score-form">
-          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder={{document.GPAScore}}>
+          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder="Selected: {{document.GPAScore}}">
           <input class="btn btn-sm" type="submit">
         </div>
       </form>
