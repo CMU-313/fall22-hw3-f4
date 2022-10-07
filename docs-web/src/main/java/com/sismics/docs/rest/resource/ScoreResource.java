@@ -69,7 +69,7 @@ public class ScoreResource extends BaseResource {
         int experienceScore = Integer.parseInt(document.getExperienceScore());
         float GPAScore = Float.parseFloat(document.getGPA());
 
-        float curScore = calculateAvgScore(score, experienceScore, GPAScore);
+        String curScore = String.valueOf(calculateAvgScore(score, experienceScore, GPAScore));
 
         documentDao.update(document, principal.getId());
         // Returns ok
@@ -112,7 +112,7 @@ public class ScoreResource extends BaseResource {
         int skillScore = Integer.parseInt(document.getSkillScore());
         float GPAScore = Float.parseFloat(document.getGPA());
 
-        float curScore = calculateAvgScore(score, skillScore, GPAScore);
+        String curScore = String.valueOf(calculateAvgScore(score, skillScore, GPAScore));
 
         documentDao.update(document, principal.getId());
         
@@ -155,7 +155,7 @@ public class ScoreResource extends BaseResource {
         int experienceScore = Integer.parseInt(document.getExperienceScore());
         int skillScore = Integer.parseInt(document.getSkillScore());
 
-        float curScore = calculateAvgScore(skillScore, experienceScore, score);
+        String curScore = String.valueOf(calculateAvgScore(skillScore, experienceScore, score));
 
         documentDao.update(document, principal.getId());
         
