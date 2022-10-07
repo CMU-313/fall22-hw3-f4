@@ -54,7 +54,7 @@ public class TestScoreResource extends BaseJerseyTest {
         String docId = json.getString("id");
         
         // Put a skill score to a document
-        json = target().path("/skillScore").request()
+        json = target().path("/score/skillScore").request()
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
@@ -69,7 +69,7 @@ public class TestScoreResource extends BaseJerseyTest {
         Assert.assertEquals("testUser", skillReviewerVal);
 
         // Put an experience score to a document
-        json = target().path("/experienceScore").request()
+        json = target().path("/score/experienceScore").request()
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
@@ -84,7 +84,7 @@ public class TestScoreResource extends BaseJerseyTest {
         Assert.assertEquals("testUser", experienceReviewerVal);
 
         // Put gpa to a document
-        json = target().path("/GPA").request()
+        json = target().path("/score/GPAScore").request()
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
