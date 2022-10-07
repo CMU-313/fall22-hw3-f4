@@ -131,19 +131,15 @@
         </div>
       </div>
 
-      <p ng-if="curscore != null || (document.skillScore != null && document.experienceScore != null && document.GPA != null)" class="page-header page-header-side">
+      <p class="page-header page-header-side">
         <span class="fas fa-star"></span>
         Current Score: {{curscore == null ? 
           ((document.skillScore + document.experienceScore + document.GPA)/3) : 
           curscore}}
       </p>
 
-      <p ng-if="curscore == null && (document.skillScore == null || document.experienceScore == null || document.GPA == null)" class="page-header page-header-side"> 
-        Current Score: None
-      </p> 
-
       <!-- connected to backend and middleware -->
-      <div ng-if="curscore != null || (document.skillScore != null || document.experienceScore != null || document.GPA != null)" class="score-display">  
+      <div class="score-display">  
         <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(curscore == null ? (document.skillScore + document.experienceScore + document.GPA)/3) : score)"></i>       
         <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(curscore == null ? (document.skillScore + document.experienceScore + document.GPA)/3) : score)"></i>  
       </div>   
@@ -152,7 +148,7 @@
         <label>Skill Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="skillScore">
-            <option value="">Add skill score</option>
+            <option value="0">Add skill score</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -167,7 +163,7 @@
         <label>Experience Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="experienceScore">
-            <option value="">Add experience score</option>
+            <option value="0">Add experience score</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -181,72 +177,8 @@
       <form ng-submit="addGPAScore()">
         <label for="gpaInput">GPA</label>
         <div class="form-group score-form">
-          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder="Add GPA">
+          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder={{document.GPAScore}}>
           <input class="btn btn-sm" type="submit">
-        </div>
-      </form>
-
-      <p class="page-header page-header-side">
-        <span class="fas fa-star"></span>
-        Current Score: {{curscore}}
-      </p>
-
-      <!-- connected to backend and middleware -->
-      <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
-      </div>  
-
-
-      <!-- dummy data -->
-      <!-- <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(4)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(4)"></i>  
-      </div>   -->
-
-      <form ng-submit="addScore()">
-        <div class="form-group">
-          <select class="form-control" ng-model="score">
-            <option value="">Add a rating</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <input type="submit">
-        </div>
-      </form>
-
-      <p class="page-header page-header-side">
-        <span class="fas fa-star"></span>
-        Current Score: {{curscore}}
-      </p>
-
-      <!-- connected to backend and middleware -->
-      <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
-      </div>  
-
-
-      <!-- dummy data -->
-      <!-- <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(4)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(4)"></i>  
-      </div>   -->
-
-      <form ng-submit="addScore()">
-        <div class="form-group">
-          <select class="form-control" ng-model="score">
-            <option value="">Add a rating</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <input type="submit">
         </div>
       </form>
 
