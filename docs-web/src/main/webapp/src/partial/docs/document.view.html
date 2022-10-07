@@ -131,14 +131,14 @@
         </div>
       </div>
 
-      <p ng-if="curscore != 'None' && document.skillScore != null && document.experienceScore != null && document.GPA != null" class="page-header page-header-side">
+      <p ng-if="document.skillScore != null && document.experienceScore != null && document.GPA != null" class="page-header page-header-side">
         <span class="fas fa-star"></span>
         Current Score: {{curscore == null ? 
           ((document.skillScore + document.experienceScore + document.GPA)/3) : 
           curscore}}
       </p>
 
-      <p ng-if="curscore == 'None' || document.skillScore != null || document.experienceScore != null || document.GPA != null" class="page-header page-header-side"> 
+      <p ng-if="document.skillScore != null || document.experienceScore != null || document.GPA != null" class="page-header page-header-side"> 
         Current Score: None
       </p> 
 
@@ -149,9 +149,10 @@
       </div>   
 
       <form ng-submit="addSkillScore()">
-        <div class="form-group">
+        <label>Skill Score</label>
+        <div class="form-group score-form">
           <select class="form-control" ng-model="skillScore">
-            <option value="">Skill score</option>
+            <option value="">Add skill score</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -163,9 +164,10 @@
       </form>
 
       <form ng-submit="addExperienceScore()">
-        <div class="form-group">
+        <label>Experience Score</label>
+        <div class="form-group score-form">
           <select class="form-control" ng-model="experienceScore">
-            <option value="">Experience score</option>
+            <option value="">Add experience score</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -177,7 +179,8 @@
       </form>
 
       <form ng-submit="addGPAScore()">
-        <div class="form-group">
+        <label for="gpaInput">GPA</label>
+        <div class="form-group score-form">
           <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder="Add GPA">
           <input class="btn btn-sm" type="submit">
         </div>
