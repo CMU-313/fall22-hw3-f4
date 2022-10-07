@@ -148,7 +148,7 @@
         <label>Skill Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="skillScore">
-            <option value="0">Add skill score</option>
+            <option value="">Selected: {{document.skillScore}}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -163,7 +163,7 @@
         <label>Experience Score</label>
         <div class="form-group score-form">
           <select class="form-control" ng-model="experienceScore">
-            <option value="0">Add experience score</option>
+            <option value="">Selected: {{document.experienceScore}}</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -177,7 +177,7 @@
       <form ng-submit="addGPAScore()">
         <label for="gpaInput">GPA</label>
         <div class="form-group score-form">
-          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder={{document.GPAScore}}>
+          <input type="text" class="form-control" id="gpaInput" ng-model="GPAScore" ng-attr-placeholder="Selected: {{document.GPAScore}}">
           <input class="btn btn-sm" type="submit">
         </div>
       </form>
