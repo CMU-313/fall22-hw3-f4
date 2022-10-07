@@ -63,7 +63,7 @@ public class TestScoreResource extends BaseJerseyTest {
         
         // Test the skill score response values
         String avgSkill = json.getString("score");
-        Assert.assertEquals("1.0", avgSkill);
+        Assert.assertEquals("3.0", avgSkill);
         
         String skillReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", skillReviewerVal);
@@ -78,7 +78,7 @@ public class TestScoreResource extends BaseJerseyTest {
         
         // Test the experience score response values
         String avgExperience = json.getString("score");
-        Assert.assertEquals("1.6666666", avgExperience);
+        Assert.assertEquals("2.5", avgExperience);
         
         String experienceReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", experienceReviewerVal);
@@ -88,12 +88,12 @@ public class TestScoreResource extends BaseJerseyTest {
         .cookie(TokenBasedSecurityFilter.COOKIE_NAME, testUserToken)
         .put(Entity.form(new Form()
                 .param("id", docId)
-                .param("GPAScore", "1.5")
+                .param("GPAScore", "1.0")
             ), JsonObject.class);
         
         // Test the gpa response values
         String avgGPA = json.getString("score");
-        Assert.assertEquals("2.1666667", avgGPA);
+        Assert.assertEquals("2.0", avgGPA);
         
         String GPAReviewerVal = json.getString("reviewer");
         Assert.assertEquals("testUser", GPAReviewerVal);
@@ -112,6 +112,6 @@ public class TestScoreResource extends BaseJerseyTest {
         Assert.assertEquals("2", storedExperienceScore);
 
         String storedGPA = json.getString("GPAScore");
-        Assert.assertEquals("1.5", storedGPA);
+        Assert.assertEquals("1.0", storedGPA);
     }
 }
