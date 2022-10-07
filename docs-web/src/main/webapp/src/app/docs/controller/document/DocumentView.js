@@ -22,24 +22,34 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
    * Add a skill score.
    */
   $scope.addSkillScore = function () {
-    Restangular.one('score/skillScore').put({
-      id: $stateParams.id,
-      skillScore: $scope.skillScore
-    }).then(function (data) {
-      $scope.curscore = data.skillScore;
-    });
+    var score = parseInt($scope.skillScore);
+    if (score >= 1 && score <= 5) {
+      Restangular.one('score/skillScore').put({
+        id: $stateParams.id,
+        skillScore: $scope.skillScore
+      }).then(function (data) {
+        $scope.curscore = data.skillScore;
+      });
+    } else {
+      alert("Invalid Score! Score must be a numeric value between 1 and 5.")
+    }
   };
 
   /**
    * Add a experience score.
    */
    $scope.addExperienceScore = function () {
-    Restangular.one('score/experienceScore').put({
-      id: $stateParams.id,
-      experienceScore: $scope.experienceScore
-    }).then(function (data) {
-      $scope.curscore = data.experienceScore;
-    });
+    var score = parseInt($scope.experienceScore);
+    if (score >= 1 && score <= 5) {
+      Restangular.one('score/experienceScore').put({
+        id: $stateParams.id,
+        experienceScore: $scope.experienceScore
+      }).then(function (data) {
+        $scope.curscore = data.experienceScore;
+      });
+    } else {
+      alert("Invalid Score! Score must be a numeric value between 1 and 5.")
+    }
   };
 
   /**
@@ -57,7 +67,6 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
     } else {
       alert("Invalid Score! Score must be a numeric value between 0 and 4.")
     }
-    
   };
 
   /**
