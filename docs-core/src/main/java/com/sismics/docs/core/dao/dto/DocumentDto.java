@@ -67,7 +67,7 @@ public class DocumentDto {
     private String rights;
 
     /**
-     * Score. -- testing
+     * Score.
      */
     private String score;
 
@@ -214,11 +214,11 @@ public class DocumentDto {
     }
 
     public String getScore() {
-        return rights;
+        return score;
     }
 
-    public void setScore(String rights) {
-        this.rights = rights;
+    public void setScore(String score) {
+        this.score = score;
     }
 
     public Long getCreateTimestamp() {
