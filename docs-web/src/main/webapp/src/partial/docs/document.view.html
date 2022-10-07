@@ -131,16 +131,20 @@
         </div>
       </div>
 
-      <p class="page-header page-header-side">
+      <p ng-if="curscore != 'None' && document.score != null" class="page-header page-header-side">
         <span class="fas fa-star"></span>
-        Current Score: {{curscore}}
+        Current Score: {{curscore == null ? document.score : curscore}}
       </p>
 
+      <p ng-if="curscore == 'None' || document.score == null" class="page-header page-header-side"> 
+        Current Score: None
+      </p> 
+
       <!-- connected to backend and middleware -->
-      <div class="score-display">  
-        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(score)"></i>       
-        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(score)"></i>  
-      </div>  
+      <div ng-if="curscore != 'None'" class="score-display">  
+        <i class="fa fa-star rating-star" style="color:rgb(233, 175, 0);" ng-repeat="t in getYellowStars(curscore == null ? document.score : score)"></i>       
+        <i class="fa fa-star rating-star" style="color:#878685;" ng-repeat="t in getGreyStars(curscore == null ? document.score : score)"></i>  
+      </div>   
 
       <form ng-submit="addSkillScore()">
         <div class="form-group">
